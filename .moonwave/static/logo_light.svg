@@ -1,5 +1,9 @@
-<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M64 64L0 0V64H64Z" fill="#18191A"/>
-<path d="M64 64L0 0V64H64Z" stroke="#18191A"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M0 64H64V0L0 64ZM51.2 30.9019L30.9019 51.2H51.2V30.9019Z" fill="#4D69FF"/>
-</svg>
+# <picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/JusteTheCoder/Sharp/blob/main/.moonwave/static/logo_dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://github.com/JusteTheCoder/Sharp/blob/main/.moonwave/static/logo_light.svg">
+  <img src="https://github.com/JusteTheCoder/Sharp/blob/main/.moonwave/static/logo_dark.svg" width="30">
+</picture> Sharp
+
+Sharp is a lightweight framework that focuses on code organization and structure while also seamlessly bridging the server-client barrier.
+
+To get started using Sharp, read the [Getting Started](#getting-started) guide.
