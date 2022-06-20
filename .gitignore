@@ -1,0 +1,8 @@
+# Project build file
+/*.rbxm
+/*.rbxmx
+# VS Code folder
+.vscode/
+
+# Site folder
+site/

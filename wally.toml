@@ -1,0 +1,10 @@
+[package]
+name = "juste/sharp"
+description = "A lightweight, and modern roblox framework."
+version = "0.1.0"
+license = "MIT"
+authors = ["Juste"]
+registry = "https://github.com/UpliftGames/wally-index"
+realm = "shared"
+
+[dependencies]
