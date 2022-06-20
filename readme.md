@@ -1,4 +1,4 @@
-# [!LOGO](https://github.com/JusteTheCoder/Sharp/blob/main/.moonwave/static/logo.svg) Sharp
+# ![LOGO](https://github.com/JusteTheCoder/Sharp/blob/main/.moonwave/static/logo.svg) Sharp
 
 Sharp is a lightweight framework that focuses on code organization and structure while also seamlessly bridging the server-client barrier.
 
