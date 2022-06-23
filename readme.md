@@ -1,3 +1,5 @@
+# NOT READY FOR PRODUCTION
+
 # Sharp
 
 Sharp is a lightweight framework that focuses on code organization and structure while also seamlessly bridging the server-client barrier.
