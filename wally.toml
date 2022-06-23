@@ -1,10 +1,12 @@
 [package]
-name = "juste/sharp"
-description = "A lightweight, and modern roblox framework."
-version = "0.1.0"
+name = "justethecoder/sharp"
+description = "A lightweight framework for Roblox."
 license = "MIT"
-authors = ["Juste"]
+version = "0.1.1"
+
 registry = "https://github.com/UpliftGames/wally-index"
 realm = "shared"
+
+exclude = [".gitingore", ".gitattributes"]
 
 [dependencies]
