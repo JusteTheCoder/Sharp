@@ -2,6 +2,14 @@ local Sharp = _G.Sharp
 
 --[=[
 	Middleware for the Net library.
+
+	:::caution
+
+	The middleware API is subject to change in future versions.
+	The current implementation suffers from performance issues.
+
+	:::
+
 	@class NetMiddleware
 ]=]
 
