@@ -53,5 +53,5 @@ end
 
 return table.freeze({
 	buildLibrary = buildLibrary,
-	buildPackages = buildPackages
+	buildPackages = buildPackages,
 })

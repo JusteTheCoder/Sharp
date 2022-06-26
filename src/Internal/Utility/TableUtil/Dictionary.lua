@@ -213,5 +213,5 @@ return table.freeze({
 	map = map,
 	filter = filter,
 	reduce = reduce,
-	fill = fill
+	fill = fill,
 })

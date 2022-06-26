@@ -109,7 +109,7 @@ end
 ]=]
 
 function ServerInterface.new(netType)
-	return setmetatable({_netType = netType}, ServerInterface)
+	return setmetatable({ _netType = netType }, ServerInterface)
 end
 
 return ServerInterface

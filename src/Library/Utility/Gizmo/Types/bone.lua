@@ -9,7 +9,7 @@ local folder = Workspace:FindFirstChild("_Gizmos")
 local bone = {}
 
 function bone.update(instances, params)
-    local startPoint = params.startPoint
+	local startPoint = params.startPoint
 	local endPoint = params.endPoint
 
 	local direction = endPoint - startPoint
@@ -37,7 +37,7 @@ function bone.update(instances, params)
 end
 
 function bone.create()
-    local originSphere = Instance.new("SphereHandleAdornment")
+	local originSphere = Instance.new("SphereHandleAdornment")
 	originSphere.Name = "originSphere"
 	originSphere.Adornee = Workspace
 	originSphere.Parent = folder

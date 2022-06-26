@@ -14,14 +14,14 @@ function sphere.update(instances, params)
 end
 
 function sphere.create()
-    local sphereInstance = Instance.new("SphereHandleAdornment")
-    sphereInstance.Name = "sphere"
-    sphereInstance.Adornee = Workspace
-    sphereInstance.Parent = folder
+	local sphereInstance = Instance.new("SphereHandleAdornment")
+	sphereInstance.Name = "sphere"
+	sphereInstance.Adornee = Workspace
+	sphereInstance.Parent = folder
 
-    return {
-        sphere = sphereInstance,
-    }
+	return {
+		sphere = sphereInstance,
+	}
 end
 
 return sphere
