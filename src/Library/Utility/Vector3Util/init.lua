@@ -257,5 +257,19 @@ function Vector3Util.flat(vector)
 	return Vector3.new(vector.X, 0, vector.Z)
 end
 
+--[=[
+	Returns a vector from angle.
+
+	@param angle number
+	@param magnitude number?
+
+	@return Vector3
+]=]
+
+function Vector3Util.fromAngle(angle, magnitude)
+	magnitude = magnitude or 1
+	return Vector3.new(math.sin(angle), 0, math.cos(angle)) * magnitude
+end
+
 table.freeze(Vector3Util)
 return Vector3Util
