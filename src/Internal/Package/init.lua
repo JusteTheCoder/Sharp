@@ -20,14 +20,28 @@ local STRICT_WRITE_ERROR = "Cannot assign property '%s' to read-only table '%s'.
 local Internal = script.Parent
 local Logger = require(Internal.Utility.Logger)
 
+local function _nextModule(t, lastName)
+	local name, module = next(t, lastName)
+
+	if module == nil then
+		return nil
+	end
+
+	return name, require(module)
+end
+
 local packageMeta = {
 	__index = function(self, key)
-		local module = self._moduleTree[key]
+		local module = self._modules[key]
 		return module and require(module) or Logger.error(2, MODULE_NOT_FOUND, key, self._name)
 	end,
 
 	__newindex = function(self, key)
 		Logger.logError(2, STRICT_WRITE_ERROR, key, self._name)
+	end,
+
+	__iter = function(self)
+		return _nextModule, self._modules
 	end,
 }
 
