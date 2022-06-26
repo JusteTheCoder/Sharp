@@ -270,5 +270,17 @@ function Vector3Util.fromAngle(angle, magnitude)
 	return Vector3.new(math.sin(angle), 0, math.cos(angle)) * (magnitude or 1)
 end
 
+--[=[
+	Returns the square magnitude of a vector.
+
+	@param vector Vector3
+
+	@return number
+]=]
+
+function Vector3Util.getMagnitudeSquared(vector)
+	return vector.X ^ 2 + vector.Y ^ 2 + vector.Z ^ 2
+end
+
 table.freeze(Vector3Util)
 return Vector3Util
