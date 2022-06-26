@@ -89,7 +89,7 @@ end
 --[=[
 	Lerps an angle.
 	Would it make sense to have this function return an absolute angle?
-	I don't know.
+	I don't know. It may mess up some things.
 
 	@within Numbers
 	@param a number
