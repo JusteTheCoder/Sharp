@@ -267,8 +267,7 @@ end
 ]=]
 
 function Vector3Util.fromAngle(angle, magnitude)
-	magnitude = magnitude or 1
-	return Vector3.new(math.sin(angle), 0, math.cos(angle)) * magnitude
+	return Vector3.new(math.sin(angle), 0, math.cos(angle)) * (magnitude or 1)
 end
 
 table.freeze(Vector3Util)
