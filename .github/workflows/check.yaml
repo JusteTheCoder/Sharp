@@ -43,9 +43,9 @@ jobs:
 
       - name: Publish release to Wally
         env:
-          WALLY_TOKEN: ${{ secrets.WALLY_AUTH }}
+          WALLY_TOKEN: ${{ secrets.WALLY_AUTH_TOKEN }}
         run: |
+          cd lib
           mkdir =p ~/.wally
           printf "[tokens]\n\"https://api.wally.run/\" = \"%s\"" "$WALLY_TOKEN" >> ~/.wally/auth.toml
-          cd lib
           wally publish
