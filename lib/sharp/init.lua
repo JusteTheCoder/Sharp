@@ -1,3 +1,5 @@
+-- The root folder contains files from wally
+local Root = script.Parent
 local SourceLibrary = script.Library
 local Internal = script.Internal
 local Util = Internal.Util
@@ -38,7 +40,7 @@ local Sharp = {
 
 	[singletons] = {},
 	[awaitingSingletons] = {},
-	[libraries] = { SourceLibrary, Util },
+	[libraries] = { SourceLibrary, Util, { Root.Promise } },
 
 	Singleton = Singleton,
 	Library = nil,
