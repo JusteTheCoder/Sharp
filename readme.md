@@ -95,7 +95,6 @@ To create a singleton, call the define function:
 ```
 
 Singletons can be accessed before they are created, and the optional data will be merged with the existing definition allowing cross-referencing singletons.
-Accessing singletons:
 ```lua
     local MySingleton = Sharp.Singleton.MySingleton
 ```
