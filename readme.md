@@ -5,7 +5,7 @@
 
 ## Installation
 
-Add as wally dependency (e.g. `Sharp = "justethecoder/sharp@2.1.2"`)
+Add as wally dependency (e.g. `Sharp = "justethecoder/sharp@2.2.2"`)
 ## Initialization
 
 ```lua
