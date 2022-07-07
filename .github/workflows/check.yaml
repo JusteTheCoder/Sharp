@@ -1,7 +1,6 @@
 name: Check
 
-on:
-  pull_request:
+on: [pull_request, push]
 
 jobs:
   lint:
@@ -30,3 +29,23 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           args: --check lib
+  build:
+    if: github.event.push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Dependencies
+        run: wally install
+      - name: Get Release from wally.toml
+        uses: SebRollen/toml-action@v1.0.0
+        id: read_toml
+        with: 
+          file: 'wally.toml'
+          field: 'package.version'
+      - name: Publish to Wally
+        env: 
+          WALLY_TOKEN: ${{ secrets.WALLY_AUTH_TOKEN }}
+        run: |
+          mkdir =p ~/.wally
+          printf "[tokens]\n\"https://api.wally.run/\" = \"%s\"" "$WALLY_TOKEN" >> ~/.wally/auth.toml
+          wally publish
+      
