@@ -17,6 +17,10 @@ local function getRecursive(location, t)
 	t = t or {}
 
 	for _, child in ipairs(location:GetChildren()) do
+		if child.Name == "Sharp" then
+			continue
+		end
+
 		if child:IsA("ModuleScript") then
 			t[child.Name] = child
 		else

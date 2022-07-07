@@ -1,152 +1,152 @@
 <div align="center">
 	<h1>Sharp</h1>
-	<p>A powerful framework for networking and organization.</p>
+	<a href="https://github.com/JusteTheCoder/Sharp/actions">
+		<img src="https://github.com/JusteTheCoder/Sharp/actions/workflows/check.yaml/badge.svg?branch=main"/>
+	</a>
 </div>
+
+## Why Sharp?
+
+### Motivation
+
+In the past I've tried tons of different frameworks. For the longest time I used Knit
+,however to me Knits service-controller architecture feels too restrictive. So I decided to create my own.
+
+### Structure
+
+Unlike Knit, Sharp abstracts the networking functionality away from services and controllers leaving 
+away a lifecycle object known as a singleton. Due to the internal structure of singletons they also
+permit cross-referencing between each other.
+
+### Networking
+
+Sharp comes packed in with a powerful networking library called SharpNet, or just net. Net is a safe
+solution for networking offering an extensive middleware api. 
+
+Now I don't want to sound too ambitious, but I'm fairly confident that Net offers the most
+functionality out of all open-source networking libraries designed for Roblox development.
 
 ## Installation
 
-Add as wally dependency (e.g. `Sharp = "justethecoder/sharp@2.2.2"`)
-## Initialization
+Sharp can be installed through wally by adding it as
+a dependency (e.g. `Sharp = "justethecoder/sharp@3.0.0"`)
 
+[Installing Wally](https://github.com/UpliftGames/wally)
+
+## Quick Start
+
+Now generally you'll want to use only two scripts: one localscript in 'StarterPlayerScripts' and one
+serverscript in 'ServerScriptService'.
+
+The contents of those scripts in the most basic case is as follows:
 ```lua
     local ReplicatedStorage = game:GetService("ReplicatedStorage")
-    local Sharp = require(ReplicatedStorage:WaitForChild("Sharp"))
-
-    Sharp.onStart(function()
-        print("Sharp is ready!")
-    end)
-
-    task.spawn(function()
-        Sharp.await() -- Yield until Sharp is ready.
-    end)
+    local Sharp = require(ReplicatedStorage.Packages.Sharp)
 
     Sharp.start() -- Yields if necessary
 ```
 
-After initialization, Sharp can be accessed through the `Sharp` global variable.
-
-## Adding libraries and singletons
-
-You can add folders containing modules as either libraries or singletons.
-This must be done before initialization.
-
+You can also utilize the two other start functions:
 ```lua
-    Sharp.addLibraries(ReplicatedStorage.Source.Libraries)
-    Sharp.addSingletons(ReplicatedStorage.Source.Singletons)
+    Sharp.await() -- Yields until sharp is ready
+    Sharp.onStart(function() -- This will be called when sharp is ready
+    end)
 ```
 
-## Libraries
+After initialization, Sharp will be available as a global variable "_G.Sharp".
 
-Libraries are modules which are lazy loaded when needed.
-They can be accessed after initialization through the `Sharp.Library` table.
+### Adding singletons and libraries
+
+Before calling the start function you can add locations to Sharp.
+All modules under the given location will be added to Sharp as either singletons or libraries
+and their sub-modules as packages.
 
 ```lua
-    local Signal = Sharp.Library.Signal
-    local Promise = Sharp.Library.Promise
+    Sharp.addSingletons(singletonFolder)
+    Sharp.addLibrary(libraryFolder)
 ```
 
-## Singletons
+### Libraries
 
-Singletons are the core of Sharp. They are a way to create a single instance of a class that can be accessed from anywhere in the code.
+Libraries are simply modules which are lazy-loaded when they are accessed.
+```lua
+    local Sharp = _G.Sharp
+    local MyModule = Sharp.Library.MyModule
+```
+
+### Packages
+
+The sub-modules of both singletons and libraries can be accessed as packages, also lazy loaded:
+```lua
+    local Sharp = _G.Sharp
+    local MySubModule = Sharp.Package.MyModule.MySubModule
+```
+
+### Singletons
+
+Singletons are modules which are loaded when the start function is called.
+To create a singleton, call the define function:
+```lua
+    -- The second argument is optional
+    local MySingleton = Sharp.Singleton.define("MySingleton", {
+        value = 10
+    })
+
+    function MySingleton.first()
+    end
+
+    -- Will be called after the first function of all singletons is called
+    function MySingleton.on()
+    end
+
+    return MySingelton
+```
+
+Singletons can be accessed before they are created, and the optional data will be merged with the existing definition allowing cross-referencing singletons.
 
 Accessing singletons:
-
 ```lua
     local MySingleton = Sharp.Singleton.MySingleton
 ```
 
-Creating singletons:
-
+Singleton modules aren't forced to return a singleton value:
 ```lua
-    local MySingleton = Sharp.Singleton.define("MySingleton")
-    MySingleton.someValue = "Hello!"
+    local MySingleton = {}
+
+    -- Life cycle functions will still work.
+
+    return MySingelton
 ```
 
-or
+### Networking
 
-```lua
-    local MySingleton = Sharp.Singleton.define("MySingleton", {
-        someValue = "Hello!"
-    })
-```
+Sharp offers some powerful networking features through its built-in Net library.
 
-Singletons can be accessed before they are created, and the optional data will be merged
-with the existing definition allowing cross-referencing singletons:
+#### Networking basics
 
-```lua
-	-- Singleton 1
-	local MySingleton1 = Sharp.Singleton.MySingleton1
-
-	local MySingleton2 = Sharp.Singleton.define("MySingleton2")
-
-	-- Singleton 2
-	local MySingleton2 = Sharp.Singleton.MySingleton2
-
-	local MySingleton1 = Sharp.Singleton.define("MySingleton1")
-```
-
-Singletons also contain optional lifecycle methods.
-These methods are available to all modules inside a singleton folder not just ones
-which utilize the Singleton library.
-
-```lua
-    function MySingleton.first()
-    end
-
-    -- The on function is called only after all first methods have been called.
-    function MySingleton.on()
-    end
-```
-
-## Packages
-
-Packages are a way to access sub-modules of singletons and libraries.
-Also lazy loaded.
-
-```lua
-    local MyPackage = Sharp.Package.MyPackage
-    local MySubModule = MyPackage.SubModule
-```
-
-## Networking
-
-Sharp also offers some powerful networking features through its
-built-in Net library.
-
-### Networking basics
-
-Net has two types of events:
-Event - Your standard event; can be fired and listened to.
-AsyncEvent - An event that only be fired on the client and returns values asynchronously through a promise.
+Net has two types of events: Event - Your standard event; can be fired and listened to. AsyncEvent - An event that can only be fired on the client and returns values asynchronously through a promise.
 
 Server-side example:
-
-```lua
-    local Net = Sharp.Library.Net
+ ```lua
+     local Net = Sharp.Library.Net
 
     local MyBridge = Net.now("MyBridge", {
         myEvent = Net.Type.event(),
         myAsyncEvent = Net.Type.asyncEvent()
     })
 
-    MyBridge.myEvent:Connect(function(client, message)
-        print("Client " .. client.Name .. " fired myEvent with message " .. message)
-        --> "Client client fired myEvent with message Hello World!"
+    MyBridge.myEvent:Connect(function(client, ...)
+        print("Client " .. client.Name .. " fired MyEvent")
     end)
 
     MyBridge.myAsyncEvent:setCallback(function(client, ...)
-        task.wait(5)
-        return "Hello " .. client.Name .. "from server!"
+        -- This can yield
+        task.wait(10)
+        return "Hello ".. client.Name .. "!"
     end)
-
-    MyBridge.myEvent:sendToClient(Players.SomePlayer1, "Hello World!")
-    MyBridge.myEvent:sendToClients({Players.SomePlayer1, Players.SomePlayer2}, "Hello World!")
-    MyBridge.myEvent:sendToClientsExcept({Players.SomePlayer1, Players.SomePlayer2}, "Hello World!")
-    MyBridge.myEvent:sendToAllClients("Hello World!")
-```
+ ```
 
 Client-side example:
-
 ```lua
     local Net = Sharp.Library.Net
 
@@ -154,19 +154,55 @@ Client-side example:
     local MyBridge = Net.now("MyBridge", Net.Trove)
 
     MyBridge.myEvent:Connect(function(message)
-        print(message) --> "Hello World!"
+        print(message)
     end)
 
-    MyBridge.myAsyncEvent:setTimeot(3) --> If the callback takes longer than 3 seconds, it will be aborted.
+    MyBridge.myAsyncEvent:setTimeot(3) --> If the callback takes longer than 3 seconds, the promise will fail.
 
-    MyBridge.myEvent:sendToServer("Hello World!")
+    MyBridge.myEvent:sendToServer("Hello Server!")
     local status, message = MyBridge.myAsyncEvent:callServer():await()
     --> promise failed since call took longer than 3 seconds
 ```
 
+#### With singletons
+
+On top of the Net.one constructor, Net offers two other constructors: Net.use - Accepts an optional table as the second argument. Net.with - Same as Net.use, but constructs a singleton.
+
+```lua
+    local MyNetObject = Net.use("MyNetObject", {
+        value = "Hello!"
+    })
+
+    -- Again, Net.Trove can be used on the client.
+    MyNetObject:netAdd({
+        myEvent = Net.Type.event(),
+        myAsyncEvent = Net.Type.asyncEvent()
+    })
+
+    -- Events are added to the table.
+    MyNetObject.myEvent:Connect(function(message)
+        print(message)
+    end)
+```
+
+You can use a singleton as the second argument:
+```lua
+    local MyNetObject = Net.use("MyNetObject", Sharp.Singleton.define("MyNetObject", {
+        value = "Hello!"
+    }))
+```
+
+However that doesn't look very nice.
+So use Net.with instead:
+```lua
+    -- Defines a singleton
+    local MyNetObject = Net.with("MyNetObject", {
+        value = "Hello!"
+    })
+```
+
 ### Using middleware
 
-Sharp also offers a middleware system for networking.
 There are two types of middleware:
 Inbound - Called when an event is received
 Outbound - Called when an event is sent
@@ -177,7 +213,7 @@ Server-side example:
     local MyBridge = ...
 
     MyBridge.myEvent:useInboundMiddleware({
-        -- Limit the number of call to 10 per minute.
+        -- Limit the number of calls to 10 per minute.
         Net.Middleware.throttle(10),
         -- Check if the first argument is a string.
         -- Usage with t highly recommended.
@@ -187,8 +223,8 @@ Server-side example:
     })
 
     MyBridge.myEvent:useOutboundMiddleware({
-        -- Only calls the event on clients with names
-        -- that are longer than 5 characters.
+        -- Only sends the event to client
+        -- if the client's name is longer than 5 characters.
         Net.Middleware.block(function(client, ...)
             return client.Name:len() > 5
         end)
@@ -221,10 +257,9 @@ Client and server:
     MyBridge.myEvent:outboundProcess(serialize)
 ```
 
-Are you noticing what I'm noticing?
-What if we want to do more than just serialize and deserialize?
-I want to have multiple functions that do different things.
-In this case you can use Net.chain(...) to do just that.
+To use multiple functions use simply pass multiple functions
+to the inboundProcess and outboundProcess methods or use Net.chain(...) to construct
+a chain of functions.
 
 ```lua
     local MyBridge = ...
@@ -239,58 +274,10 @@ In this case you can use Net.chain(...) to do just that.
         return math.clamp(number, 0, 100)
     end
 
+    -- These are the same; internally Net calls the chain function
+    -- if more than one function is passed as an argument.
+    MyBridge.myEvent:inboundProcess(deserialize, clampNumber)
     MyBridge.myEvent:inboundProcess(Net.chain(
     	deserialize, clampNumber
     ))
-    -- Net does this automatically if you pass in
-    -- more than one function.
-    MyBridge.myEvent:inboundProcess(deserialize, clampNumber)
-```
-
-### With singletons
-
-On top of the Net.one constructor, Net offers two other constructors:
-Net.use - Accepts an optional table as the second argument.
-Net.with - Same as Net.use, but constructs a singleton.
-
-```lua
-    local MyNetObject = Net.use("MyNetObject", {
-        value = "Hello!"
-    })
-
-    -- Again, Net.Trove can be used on the client.
-    MyNetObject:netAdd({
-        myEvent = Net.Type.event(),
-        myAsyncEvent = Net.Type.asyncEvent()
-    })
-
-    -- Events are added to the table.
-    MyNetObject.myEvent:Connect(function(message)
-        print(message)
-    end)
-```
-
-With Singletons:
-
-```lua
-    -- This doesn't look very nice.
-    local MyNetObject = Net.use("MyNetObject", Sharp.Singleton.define("MyNetObject", {
-        value = "Hello!"
-    }))
-
-    -- Instead use Net.with
-    local MyNetObject = Net.with("MyNetObject", {
-        value = "Hello!"
-    })
-
-    -- Again, Net.Trove can be used on the client.
-    MyNetObject:netAdd({
-        myEvent = Net.Type.event(),
-        myAsyncEvent = Net.Type.asyncEvent()
-    })
-
-    -- Events are added to the table.
-    MyNetObject.myEvent:Connect(function(message)
-        print(message)
-    end)
 ```

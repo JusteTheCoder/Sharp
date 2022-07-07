@@ -1,9 +1,10 @@
 [package]
 name = "justethecoder/sharp"
-description = "A powerful framework for building games"
-version = "2.2.2"
+description = "A powerful framework"
+version = "3.0.0"
 registry = "https://github.com/UpliftGames/wally-index"
 realm = "shared"
 
 [dependencies]
 Promise = "evaera/promise@^4"
+t = "osyrisrblx/t@3.0.0"

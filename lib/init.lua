@@ -40,7 +40,7 @@ local Sharp = {
 
 	[singletons] = {},
 	[awaitingSingletons] = {},
-	[libraries] = { SourceLibrary, Util, { Root.Promise } },
+	[libraries] = { SourceLibrary, Util, Root },
 
 	Singleton = Singleton,
 	Library = nil,
