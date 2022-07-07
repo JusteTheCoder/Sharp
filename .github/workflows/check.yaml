@@ -33,32 +33,22 @@ jobs:
     if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Install Foreman
-        uses: Roblox/setup-foreman@v1.0.1
-        with: 
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Install Foreman Toolchains
-        run: foreman install
-    
-      - name: Install Dependencies
-        run: wally install
-
-      - name: Get Release from wally.toml
-        uses: SebRollen/toml-action@v1.0.0
-        id: read_toml
-        with: 
-          file: 'lib/wally.toml'
-          field: 'package.version'
-
-      - name: Publish to Wally
-        env: 
-          WALLY_TOKEN: ${{ secrets.WALLY_AUTH_TOKEN }}
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install foreman
+        uses: Roblox/setup-foreman@v1
+        with:
+          version: "^1.0.1"
+          token: ${{ SECRETS.GITHUB_TOKEN }}
+      - name: Publish release to Wally
+        shell: bash
+        env:
+          WALLY_AUTH: ${{ secrets.WALLY_AUTH }}
         run: |
-          mkdir =p ~/.wally
-          printf "[tokens]\n\"https://api.wally.run/\" = \"%s\"" "$WALLY_TOKEN" >> ~/.wally/auth.toml
+          rm -rf .foreman-install
+          mkdir -p ~/.wally
+          echo "$WALLY_AUTH" > ~/.wally/auth.toml
+          cd src
+          rm -rf Packages
           wally publish
-      
+          cd ..
