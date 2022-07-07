@@ -47,4 +47,5 @@ jobs:
         run: |
           mkdir =p ~/.wally
           printf "[tokens]\n\"https://api.wally.run/\" = \"%s\"" "$WALLY_TOKEN" >> ~/.wally/auth.toml
+          cd lib
           wally publish
