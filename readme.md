@@ -101,7 +101,7 @@ Packages are a way to access sub-modules of singletons and libraries.
 Also lazy loaded.
 
 ```lua
-    local MyPackage = Sharp.package.MyPackage
+    local MyPackage = Sharp.Package.MyPackage
     local MySubModule = MyPackage.SubModule
 ```
 
