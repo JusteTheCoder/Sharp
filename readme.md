@@ -208,7 +208,7 @@ Server-side example:
         -- Limit the number of calls to 10 per minute.
         Net.Middleware.throttle(10),
         -- Check if the first argument is a string.
-        -- Usage with t highly recommended.
+        -- Usage with the 't' library highly recommended.
         Net.Middleware.typeCheck(function(argument)
             return type(argument) == "string"
         end)
