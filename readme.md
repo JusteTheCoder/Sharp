@@ -4,7 +4,7 @@
 </div>
 
 <div align="center">
-  ⚠ <b>WARNING</b> :Not quite ready for production yet. There might be bugs and missing features! ⚠
+  ⚠ <b>WARNING</b>: Not quite ready for production yet. There might be bugs and missing features! ⚠
 </div>
 
 ## Initialization
@@ -71,6 +71,8 @@ Singletons can be accessed before they are created, and the optional data will b
 with the existing definition.
 
 Singletons also contain optional lifecycle methods.
+These methods are available to all modules inside a singleton folder not just ones
+which utilize the Singleton library.
 
 ```lua
     function MySingleton.first()
@@ -203,7 +205,7 @@ Client and server:
 Are you noticing what I'm noticing?
 What if we want to do more than just serialize and deserialize?
 I want to have multiple functions that do different things.
-In this case you can use Net.chain(...) to chain together multiple functions.
+In this case you can use Net.chain(...) to do just that.
 
 ```lua
     local MyBridge = ...
@@ -251,7 +253,7 @@ With Singletons:
         value = "Hello!"
     }))
     
-    -- Instead use Net.with to create a singleton.
+    -- Instead use Net.with to which creates a singleton.
     local MyNetObject = Net.with("MyNetObject", {
         value = "Hello!"
     })
