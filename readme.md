@@ -4,7 +4,7 @@
 </div>
 
 <div align="center">
-  ⚠ <b>WARNING</b>:Not quite ready for production yet. There might be bugs and missing features! ⚠
+  ⚠ <b>WARNING</b> :Not quite ready for production yet. There might be bugs and missing features! ⚠
 </div>
 
 ## Initialization
