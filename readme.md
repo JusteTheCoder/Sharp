@@ -68,7 +68,19 @@ or
 ```
 
 Singletons can be accessed before they are created, and the optional data will be merged
-with the existing definition.
+with the existing definition allowing cross-referencing singletons:
+
+```lua
+	-- Singleton 1
+	local MySingleton1 = Sharp.Singleton.MySingleton1
+	
+	local MySingleton2 = Sharp.Singleton.define("MySingleton2")
+	
+	-- Singleton 2
+	local MySingleton2 = Sharp.Singleton.MySingleton2
+	
+	local MySingleton1 = Sharp.Singleton.define("MySingleton1")
+```
 
 Singletons also contain optional lifecycle methods.
 These methods are available to all modules inside a singleton folder not just ones
