@@ -33,6 +33,7 @@ jobs:
     if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-latest
     steps:
+steps:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Install foreman
@@ -48,7 +49,7 @@ jobs:
           rm -rf .foreman-install
           mkdir -p ~/.wally
           echo "$WALLY_AUTH" > ~/.wally/auth.toml
-          cd src
+          cd lib
           rm -rf Packages
           wally publish
           cd ..
