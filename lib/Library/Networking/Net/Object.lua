@@ -89,9 +89,10 @@ end
 ]=]
 
 local function getRootAsync()
-	return rootFolder and Promise.resolve(rootFolder) or promiseInstance(ReplicatedStorage, ROOT_NAME):andThen(function(root)
-		rootFolder = root
-	end)
+	return rootFolder and Promise.resolve(rootFolder)
+		or promiseInstance(ReplicatedStorage, ROOT_NAME):andThen(function(root)
+			rootFolder = root
+		end)
 end
 
 --[=[
