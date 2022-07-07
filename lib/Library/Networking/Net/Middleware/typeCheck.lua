@@ -1,4 +1,4 @@
-local BLOCK_ERROR = "Client %s called %s with invalid arguments:\n%s."
+local BLOCK_ERROR = "Client %s called %s with invalid arguments:\n%s"
 local UNKNOWN_ERROR = "Unknown error."
 
 local function typeCheck(...)
@@ -9,8 +9,8 @@ local function typeCheck(...)
 				local arg = select(i, ...)
 				local typeCheckFunction = typeCheckFunctions[i]
 
-				if not typeCheckFunctions then
-					continue
+				if not typeCheckFunction then
+					return false, BLOCK_ERROR:format(client.Name, netType._name, UNKNOWN_ERROR)
 				end
 
 				local status, err = typeCheckFunction(arg)

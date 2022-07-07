@@ -23,9 +23,9 @@ ClientEvent.__index = ClientEvent
 
 function ClientEvent:sendToServer(...)
 	if self._processOutboundMiddleware then
-		self._instance:FireClient(self._processOutboundMiddleware(...))
+		self._instance:FireServer(self._processOutboundMiddleware(...))
 	else
-		self._instance:FireClient(...)
+		self._instance:FireServer(...)
 	end
 end
 
@@ -45,7 +45,7 @@ function ClientEvent:_implement(bridgeId, name)
 
 		self._instance.OnClientEvent:Connect(function(...)
 			if self._processInboundMiddleware then
-				self._signal:fire(self:_processInboundMiddleware(...))
+				self._signal:fire(self._processInboundMiddleware(...))
 			else
 				self._signal:fire(...)
 			end

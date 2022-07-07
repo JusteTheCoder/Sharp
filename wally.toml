@@ -1,9 +1,6 @@
 [package]
 name = "justethecoder/sharp"
-description = "A lightweight framework for Roblox."
-license = "MIT"
 version = "1.1.1"
-
 registry = "https://github.com/UpliftGames/wally-index"
 realm = "shared"
 

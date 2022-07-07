@@ -116,7 +116,7 @@ function ServerEvent:_implement(bridgeId, name)
 			end
 
 			if self._processInboundMiddleware then
-				self._signal:fire(client, self:_processInboundMiddleware(...))
+				self._signal:fire(client, self._processInboundMiddleware(...))
 			else
 				self._signal:fire(client, ...)
 			end

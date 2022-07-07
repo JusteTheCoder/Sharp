@@ -72,7 +72,7 @@ end
 ]=]
 
 function Connection:Disconnect()
-	assert(self._connected, "Can't disconnect a connection twice.", 2)
+	assert(self._connected, "Can't disconnect a connection twice.")
 	self._connected = false
 
 	-- Unhook the node, but DON'T clear it. That way any fire calls that are

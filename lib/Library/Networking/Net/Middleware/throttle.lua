@@ -11,7 +11,7 @@ local function throttle(maxRequestsPerTimePeriod, timePeriod)
 	return function(netType)
 		local clientCallTimes = TableUtil.Meta.weakKeys()
 
-		return function(client, ...)
+		return function(client)
 			local clientCallTime = clientCallTimes[client]
 
 			if clientCallTime == nil then

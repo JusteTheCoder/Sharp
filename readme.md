@@ -126,8 +126,8 @@ Server-side example:
     local Net = Sharp.Library.Net
 
     local MyBridge = Net.now("MyBridge", {
-        myEvent = Net.Type.Event(),
-        myAsyncEvent = Net.Type.AsyncEvent()
+        myEvent = Net.Type.event(),
+        myAsyncEvent = Net.Type.asyncEvent()
     })
 
     MyBridge.myEvent:Connect(function(client, message)
@@ -177,23 +177,23 @@ Server-side example:
 ```lua
     local MyBridge = ...
 
-    MyBridge.myEvent:useInboundMiddleware(
+    MyBridge.myEvent:useInboundMiddleware({
         -- Limit the number of call to 10 per minute.
-        Net.Middleware.throttle(10)
+        Net.Middleware.throttle(10),
         -- Check if the first argument is a string.
         -- Usage with t highly recommended.
         Net.Middleware.typeCheck(function(argument)
             return type(argument) == "string"
         end)
-    )
+    })
 
-    MyBridge.myEvent:useOutboundMiddleware(
+    MyBridge.myEvent:useOutboundMiddleware({
         -- Only calls the event on clients with names
         -- that are longer than 5 characters.
         Net.Middleware.block(function(client, ...)
             return client.Name:len() > 5
         end)
-    )
+    })
 ```
 
 Middleware only allows for cancelling an event call.
@@ -261,8 +261,8 @@ Net.with - Same as Net.use, but constructs a singleton.
 
     -- Again, Net.Trove can be used on the client.
     MyNetObject:netAdd({
-        myEvent = Net.Type.Event(),
-        myAsyncEvent = Net.Type.AsyncEvent()
+        myEvent = Net.Type.event(),
+        myAsyncEvent = Net.Type.asyncEvent()
     })
 
     -- Events are added to the table.
@@ -286,8 +286,8 @@ With Singletons:
 
     -- Again, Net.Trove can be used on the client.
     MyNetObject:netAdd({
-        myEvent = Net.Type.Event(),
-        myAsyncEvent = Net.Type.AsyncEvent()
+        myEvent = Net.Type.event(),
+        myAsyncEvent = Net.Type.asyncEvent()
     })
 
     -- Events are added to the table.

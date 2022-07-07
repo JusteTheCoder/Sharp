@@ -14,7 +14,6 @@ local ADD_SINGLETON_ERROR = "Attempted to add singleton location '%s' after star
 local DUPLICATE_LIBRARY_ERROR = "Attempted to add library location '%s' twice."
 local DUPLICATE_SINGLETON_ERROR = "Attempted to add singleton location '%s' twice."
 local ALREADY_STARTED_ERROR = "Attempted to start Sharp after it has already been started."
-local SINGLETON_YEILD_ERROR = "Attempted to yield in singletons %s, try 'on' or 'first' instead."
 
 local started = Symbol("started")
 local ready = Symbol("ready")
@@ -58,18 +57,9 @@ end
 
 local function prepareSingleton()
 	local modules = Loader.getAllRecursive(Sharp[singletons])
-	local yielded = {}
 
-	for _, module in ipairs(modules) do
-		local moduleIndex = table.insert(yielded, module.Name)
-		task.spawn(function()
-			Sharp[awaitingSingletons][module.Name] = require(module)
-			yielded[moduleIndex] = nil
-		end)
-	end
-
-	if #yielded > 0 then
-		error(SINGLETON_YEILD_ERROR:format(table.concat(yielded, ", ")))
+	for name, module in modules do
+		Sharp[awaitingSingletons][name] = require(module)
 	end
 end
 

@@ -1,0 +1,4 @@
+std = "roblox+future"
+
+[rules]
+global_usage = "allow"

@@ -1,4 +1,4 @@
-local BLOCK_ERROR = "Blocked event call %s to %."
+local BLOCK_ERROR = "Blocked event call %s to %s."
 
 local function block(fn)
 	return function(netType)

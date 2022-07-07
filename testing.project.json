@@ -1,0 +1,36 @@
+{
+  "name": "Sharp testing",
+  "tree": {
+    "$className": "DataModel",
+    "ReplicatedStorage": {
+      "$className": "ReplicatedStorage",
+      "Sharp": {
+        "$path": "Include/Linking.lua",
+        "Packages": {
+          "$path": "Packages",
+          "Sharp": {
+            "$path": "lib"
+          }
+        }
+      },
+      "Source": {
+        "$path": "testing/shared"
+      }
+    },
+    "ServerScriptService": {
+      "$className": "ServerScriptService",
+      "Source": {
+        "$path": "testing/server"
+      }
+    },
+    "StarterPlayer": {
+      "$className": "StarterPlayer",
+      "StarterPlayerScripts": {
+        "$className": "StarterPlayerScripts",
+        "Source": {
+          "$path": "testing/client"
+        }
+      }
+    }
+  }
+}

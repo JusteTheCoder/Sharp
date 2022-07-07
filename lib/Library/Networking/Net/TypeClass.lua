@@ -72,7 +72,7 @@ end
 
 function TypeClass:outboundProcess(...)
 	local fn = ...
-	if select('#', ...) > 1 then
+	if select("#", ...) > 1 then
 		fn = chain(...)
 	end
 
@@ -91,7 +91,7 @@ end
 
 function TypeClass:inboundProcess(...)
 	local fn = ...
-	if select('#', ...) > 1 then
+	if select("#", ...) > 1 then
 		fn = chain(...)
 	end
 

@@ -83,11 +83,10 @@ end
 local function buildPackages(modules)
 	local packages = {}
 
-	for _, module in ipairs(modules) do
-		local name = module.Name
+	for name, module in modules do
 		local subModules = Loader.getDescendentModules(module)
 		-- Only build a package if the module has sub-modules.
-		if TableUtil.Dictionary.isEmpty(subModules) then
+		if TableUtil.Dictionary.isEmpty(subModules) == false then
 			packages[name] = buildPackage(subModules, name)
 		end
 	end

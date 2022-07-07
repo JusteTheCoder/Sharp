@@ -1,0 +1,12 @@
+{
+    "name": "Sharp",
+    "tree": {
+      "$path": "Include/Linking.lua",
+      "Packages": {
+        "$path": "Packages",
+        "Sharp": {
+            "$path": "lib"
+        }        
+      }
+    }
+  }

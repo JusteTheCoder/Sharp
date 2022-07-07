@@ -54,7 +54,7 @@ function ServerAsyncEvent:_implement(bridgeId, name)
 
 			local args
 			if self._processInboundMiddleware then
-				args = table.pack(self:_processInboundMiddleware(...))
+				args = table.pack(self._processInboundMiddleware(...))
 			else
 				args = table.pack(...)
 			end
