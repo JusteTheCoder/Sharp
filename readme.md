@@ -1,6 +1,6 @@
 <div align="center">
 	<h1>Sharp</h1>
-	<p>A powerful framework for code organization and structure.</p>
+	<p>A powerful framework for networking and organization.</p>
 </div>
 
 <div align="center">
