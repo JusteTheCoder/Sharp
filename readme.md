@@ -3,6 +3,9 @@
 	<p>A powerful framework for networking and organization.</p>
 </div>
 
+## Installation
+
+Add as wally dependency (e.g. `Sharp = "justethecoder/sharp@2.1.2"`)
 ## Initialization
 
 ```lua
