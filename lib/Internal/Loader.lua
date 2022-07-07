@@ -17,7 +17,7 @@ local function getRecursive(location, t)
 	t = t or {}
 
 	for _, child in ipairs(location:GetChildren()) do
-		if child.Name == "Sharp" then
+		if child.Name == "sharp" then
 			continue
 		end
 
