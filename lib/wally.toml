@@ -1,7 +1,7 @@
 [package]
 name = "justethecoder/sharp"
 description = "A powerful framework for building games"
-version = "2.1.1"
+version = "2.1.2"
 registry = "https://github.com/UpliftGames/wally-index"
 realm = "shared"
 
