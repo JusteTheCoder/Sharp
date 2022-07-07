@@ -232,7 +232,9 @@ In this case you can use Net.chain(...) to do just that.
         return math.clamp(number, 0, 100)
     end
 
-    MyBridge.myEvent:inboundProcess(Net.chain(deserialize, clampNumber))
+    MyBridge.myEvent:inboundProcess(Net.chain(
+    	deserialize, clampNumber
+    ))
 ```
 
 ### With singletons
