@@ -35,7 +35,7 @@ ServerAsyncEvent.__index = ServerAsyncEvent
 
 function ServerAsyncEvent:_implement(bridgeId, name)
 	return Object.promiseNetType(bridgeId, name, self.instanceClass):andThen(function(instance)
-		self._name = name
+		self.name = name
 		self._instance = instance
 
 		self._instance:SetAttribute("_netType", self.className)

@@ -31,7 +31,7 @@ local function throttle(maxRequestsPerTimePeriod, timePeriod)
 
 			clientCallTime._requests += 1
 			if clientCallTime._requests > maxRequestsPerTimePeriod then
-				return false, THROTTLE_ERROR:format(client.Name, netType._name)
+				return false, THROTTLE_ERROR:format(client.Name, netType.name)
 			end
 
 			return true

@@ -10,13 +10,13 @@ local function typeCheck(...)
 				local typeCheckFunction = typeCheckFunctions[i]
 
 				if not typeCheckFunction then
-					return false, BLOCK_ERROR:format(client.Name, netType._name, UNKNOWN_ERROR)
+					return false, BLOCK_ERROR:format(client.Name, netType.name, UNKNOWN_ERROR)
 				end
 
 				local status, err = typeCheckFunction(arg)
 				if not status then
 					err = err or UNKNOWN_ERROR
-					return false, BLOCK_ERROR:format(client.Name, netType._name, err)
+					return false, BLOCK_ERROR:format(client.Name, netType.name, err)
 				end
 			end
 

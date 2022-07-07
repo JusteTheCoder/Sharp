@@ -6,7 +6,7 @@ local function block(fn)
 			local result = fn(client, ...)
 
 			if not result then
-				return false, BLOCK_ERROR:format(netType._name, client.Name)
+				return false, BLOCK_ERROR:format(netType.name, client.Name)
 			end
 
 			return true

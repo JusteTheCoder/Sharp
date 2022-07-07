@@ -32,7 +32,7 @@ function ClientAsyncEvent:callServer(...)
 	local args = self._processOutboundMiddleware and { self._processOutboundMiddleware(...) } or { ... }
 
 	return Promise.try(instance.InvokeServer, instance, table.unpack(args))
-		:timeout(self._timeout, string.format(TIMEOUT_ERROR, self._name))
+		:timeout(self._timeout, string.format(TIMEOUT_ERROR, self.name))
 		:andThen(function(...)
 			if self._processInboundMiddleware then
 				return self._processInboundMiddleware(...)
@@ -66,7 +66,7 @@ end
 
 function ClientAsyncEvent:_implement(bridgeId, name)
 	return Object.promiseNetType(bridgeId, name, self.instanceClass):andThen(function(instance)
-		self._name = name
+		self.name = name
 		self._instance = instance
 	end)
 end

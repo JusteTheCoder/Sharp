@@ -23,7 +23,7 @@ As much as I don't want to seem excessively ambitious, I'm fairly confident that
 ## Installation
 
 Sharp can be installed through wally by adding it as
-a dependency (e.g. `Sharp = "justethecoder/sharp@3.0.0"`)
+a dependency (e.g. `Sharp = "justethecoder/sharp@3.0.1"`)
 
 [Installing Wally](https://github.com/UpliftGames/wally)
 
@@ -193,7 +193,7 @@ Use Net.with instead:
     })
 ```
 
-### Using middleware
+#### Using middleware
 
 There are two types of middleware:
 Inbound - Called when an event is received
@@ -270,4 +270,19 @@ To use more than one function, just pass them to the inboundProcess and outbound
     MyBridge.myEvent:inboundProcess(Net.chain(
     	deserialize, clampNumber
     ))
+```
+
+#### Custom middleware
+
+Using the the following structure you can create a custom middleware.
+Logger example:
+```lua
+    local MESSAGE = "Client '%s' fired event '%s' with arguments: %s"
+
+	local function logger(netType)
+		return function(client, ...)
+			print(string.format(MESSAGE, client.Name, netType.name, table.concat({...}, ", ")))
+			return true -- Return false to cancel the event.
+		end
+	end
 ```
