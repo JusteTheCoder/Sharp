@@ -1,5 +1,7 @@
 local Sharp = _G.Sharp
 
+local chain = Sharp.Package.Net.chain
+
 --[=[
     A base Net type which all other Net types inherit from.
 
@@ -68,7 +70,12 @@ end
     @return self
 ]=]
 
-function TypeClass:outboundProcess(fn)
+function TypeClass:outboundProcess(...)
+	local fn = ...
+	if select('#', ...) > 1 then
+		fn = chain(...)
+	end
+
 	self._processOutboundMiddleware = fn
 	return self
 end
@@ -82,7 +89,12 @@ end
     @return self
 ]=]
 
-function TypeClass:inboundProcess(fn)
+function TypeClass:inboundProcess(...)
+	local fn = ...
+	if select('#', ...) > 1 then
+		fn = chain(...)
+	end
+
 	self._processInboundMiddleware = fn
 	return self
 end

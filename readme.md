@@ -243,6 +243,9 @@ In this case you can use Net.chain(...) to do just that.
     MyBridge.myEvent:inboundProcess(Net.chain(
     	deserialize, clampNumber
     ))
+
+    -- Net does this automatically if you pass in
+    -- more than one function.
 ```
 
 ### With singletons
