@@ -30,7 +30,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           args: --check lib
   build:
-    if: !github.event.push
+    if: github.event.push
     runs-on: ubuntu-latest
     steps:
       - name: Install Dependencies
