@@ -3,10 +3,6 @@
 	<p>A powerful framework for networking and organization.</p>
 </div>
 
-<div align="center">
-  ⚠ <b>WARNING</b>: Not quite ready for production yet. There might be bugs and missing features! ⚠
-</div>
-
 ## Initialization
 
 ```lua
@@ -243,9 +239,9 @@ In this case you can use Net.chain(...) to do just that.
     MyBridge.myEvent:inboundProcess(Net.chain(
     	deserialize, clampNumber
     ))
-
     -- Net does this automatically if you pass in
     -- more than one function.
+    MyBridge.myEvent:inboundProcess(deserialize, clampNumber)
 ```
 
 ### With singletons

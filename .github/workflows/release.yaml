@@ -1,0 +1,36 @@
+name: Release
+
+on:
+  push:
+
+jobs:
+  build:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    steps:
+     - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install foreman
+        uses: Roblox/setup-foreman@v1
+        with:
+          version: "^1.0.0"
+          token: ${{ SECRETS.GITHUB_TOKEN }}
+        - name: Publish release to Wally
+        shell: bash
+        env:
+          WALLY_AUTH: ${{ secrets.WALLY_AUTH }}
+        run: |
+          rm -rf .foreman-install
+          mkdir -p ~/.wally
+          echo "$WALLY_AUTH" > ~/.wally/auth.toml
+          cd src
+          rm -rf Packages
+          wally publish
+          cd ..
+      - name: Wally install
+        run: |
+          cd src
+          rm wally.toml
+          mv wally_bundle.toml wally.toml
+          wally install
+          cd ..
