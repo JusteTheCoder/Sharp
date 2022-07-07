@@ -42,9 +42,9 @@ local shallowDefinitions = {}
 ]=]
 
 local function createShallowDefinition(name)
-    local definition = { [definedKey] = false }
-    shallowDefinitions[name] = definition
-    return definition
+	local definition = { [definedKey] = false }
+	shallowDefinitions[name] = definition
+	return definition
 end
 
 --[=[
@@ -56,7 +56,7 @@ end
 ]=]
 
 local function get(name)
-    return shallowDefinitions[name] or createShallowDefinition(name)
+	return shallowDefinitions[name] or createShallowDefinition(name)
 end
 
 --[=[
@@ -70,18 +70,18 @@ end
 ]=]
 
 local function define(name, definition)
-    local singleton = shallowDefinitions[name]
+	local singleton = shallowDefinitions[name]
 
-    if singleton == nil then
-        singleton = definition or {}
-        shallowDefinitions[name] = singleton
-    elseif definition then
-        singleton = TableUtil.Dictionary.merge(singleton, definition)
-    end
+	if singleton == nil then
+		singleton = definition or {}
+		shallowDefinitions[name] = singleton
+	elseif definition then
+		singleton = TableUtil.Dictionary.merge(singleton, definition)
+	end
 
-    singleton[definedKey] = true
+	singleton[definedKey] = true
 
-    return singleton
+	return singleton
 end
 
 --[=[
@@ -93,11 +93,11 @@ end
 ]=]
 
 local function _onLifeCycleComplete()
-    for name, definition in shallowDefinitions do
-        if definition[definedKey] == false then
-            warn(SINGLETON_NOT_FOUND:format(name))
-        end
-    end
+	for name, definition in shallowDefinitions do
+		if definition[definedKey] == false then
+			warn(SINGLETON_NOT_FOUND:format(name))
+		end
+	end
 end
 
 return setmetatable({

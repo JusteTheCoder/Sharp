@@ -9,6 +9,6 @@ local isClient = RunService:IsClient()
 ]=]
 
 return {
-    event = isClient and NetPackage.ClientEvent or NetPackage.ServerEvent,
-    asyncEvent = isClient and NetPackage.ClientAsyncEvent or NetPackage.ServerAsyncEvent,
+	event = isClient and NetPackage.ClientEvent or NetPackage.ServerEvent,
+	asyncEvent = isClient and NetPackage.ClientAsyncEvent or NetPackage.ServerAsyncEvent,
 }

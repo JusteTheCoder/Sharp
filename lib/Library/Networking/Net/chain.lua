@@ -12,20 +12,20 @@
 ]=]
 
 local function chain(...)
-    local functions = select("#", ...)
+	local functions = select("#", ...)
 
-    local function wrapCallback(fn, callback)
-        return function(...)
-            return callback(fn(...))
-        end
-    end
+	local function wrapCallback(fn, callback)
+		return function(...)
+			return callback(fn(...))
+		end
+	end
 
-    local callbackFn = select(functions, ...)
-    for i = functions - 1, 1, -1 do
-        callbackFn = wrapCallback(select(i, ...), callbackFn)
-    end
+	local callbackFn = select(functions, ...)
+	for i = functions - 1, 1, -1 do
+		callbackFn = wrapCallback(select(i, ...), callbackFn)
+	end
 
-    return callbackFn
+	return callbackFn
 end
 
 return chain

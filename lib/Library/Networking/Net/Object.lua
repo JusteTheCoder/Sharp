@@ -134,15 +134,15 @@ end
 ]=]
 
 local function getNetTypesInBridge(bridgeId)
-    return getBridgeAsync(bridgeId):andThen(function(bridge)
-        return bridge:GetChildren()
-    end)
+	return getBridgeAsync(bridgeId):andThen(function(bridge)
+		return bridge:GetChildren()
+	end)
 end
 
 return {
-    promiseInstance = promiseInstance,
-    promiseNetType = promiseNetType,
-    getRootAsync = getRootAsync,
-    getBridgeAsync = getBridgeAsync,
-    getNetTypesInBridge = getNetTypesInBridge,
+	promiseInstance = promiseInstance,
+	promiseNetType = promiseNetType,
+	getRootAsync = getRootAsync,
+	getBridgeAsync = getBridgeAsync,
+	getNetTypesInBridge = getNetTypesInBridge,
 }

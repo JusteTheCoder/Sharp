@@ -5,7 +5,7 @@
 ]=]
 
 return {
-    Array = require(script.Array),
-    Dictionary = require(script.Dictionary),
-    Meta = require(script.Meta),
+	Array = require(script.Array),
+	Dictionary = require(script.Dictionary),
+	Meta = require(script.Meta),
 }

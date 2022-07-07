@@ -43,13 +43,13 @@ function ClientEvent:_implement(bridgeId, name)
 		self._name = name
 		self._instance = instance
 
-        self._instance.OnClientEvent:Connect(function(...)
-            if self._processInboundMiddleware then
-                self._signal:fire(self:_processInboundMiddleware(...))
-            else
-                self._signal:fire(...)
-            end
-        end)
+		self._instance.OnClientEvent:Connect(function(...)
+			if self._processInboundMiddleware then
+				self._signal:fire(self:_processInboundMiddleware(...))
+			else
+				self._signal:fire(...)
+			end
+		end)
 	end)
 end
 

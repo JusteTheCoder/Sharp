@@ -4,24 +4,24 @@
     @class Meta
 ]=]
 
-local weakKeysMeta = {__mode = "k"}
-local weakValuesMeta = {__mode = "v"}
-local weakMeta = {__mode = "kv"}
+local weakKeysMeta = { __mode = "k" }
+local weakValuesMeta = { __mode = "v" }
+local weakMeta = { __mode = "kv" }
 
 local function weakKeys(t)
-    return setmetatable(t or {}, weakKeysMeta)
+	return setmetatable(t or {}, weakKeysMeta)
 end
 
 local function weakValues(t)
-    return setmetatable(t or {}, weakValuesMeta)
+	return setmetatable(t or {}, weakValuesMeta)
 end
 
 local function weak(t)
-    return setmetatable(t or {}, weakMeta)
+	return setmetatable(t or {}, weakMeta)
 end
 
 return {
-    weakKeys = weakKeys,
-    weakValues = weakValues,
-    weak = weak,
+	weakKeys = weakKeys,
+	weakValues = weakValues,
+	weak = weak,
 }

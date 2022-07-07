@@ -14,7 +14,7 @@
 ]=]
 
 local function getRecursive(location, t)
-    t = t or {}
+	t = t or {}
 
 	for _, child in ipairs(location:GetChildren()) do
 		if child:IsA("ModuleScript") then
@@ -35,13 +35,13 @@ end
 ]=]
 
 local function getAllRecursive(locations)
-    local t = {}
+	local t = {}
 
-    for _, location in ipairs(locations) do
-        getRecursive(location, t)
-    end
+	for _, location in ipairs(locations) do
+		getRecursive(location, t)
+	end
 
-    return t
+	return t
 end
 
 --[=[
@@ -52,7 +52,7 @@ end
 ]=]
 
 local function getDescendentModules(location)
-    local t = {}
+	local t = {}
 
 	for _, descendent in location:GetDescendants() do
 		if descendent:IsA("ModuleScript") then
@@ -64,7 +64,7 @@ local function getDescendentModules(location)
 end
 
 return {
-    getRecursive = getRecursive,
-    getAllRecursive = getAllRecursive,
-    getDescendentModules = getDescendentModules,
+	getRecursive = getRecursive,
+	getAllRecursive = getAllRecursive,
+	getDescendentModules = getDescendentModules,
 }

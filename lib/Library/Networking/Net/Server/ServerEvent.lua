@@ -108,7 +108,7 @@ function ServerEvent:_implement(bridgeId, name)
 
 		self._instance:SetAttribute("_netType", self.className)
 
-        self._instance.OnServerEvent:Connect(function(client, ...)
+		self._instance.OnServerEvent:Connect(function(client, ...)
 			local status, err = self:_processReceive(client, ...)
 
 			if status == false then
@@ -120,7 +120,7 @@ function ServerEvent:_implement(bridgeId, name)
 			else
 				self._signal:fire(client, ...)
 			end
-        end)
+		end)
 	end)
 end
 

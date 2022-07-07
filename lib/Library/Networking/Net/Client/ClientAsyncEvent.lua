@@ -29,18 +29,18 @@ ClientAsyncEvent.__index = ClientAsyncEvent
 
 function ClientAsyncEvent:callServer(...)
 	local instance = self._instance
-    local args = self._processOutboundMiddleware and {self._processOutboundMiddleware(...) }or {...}
+	local args = self._processOutboundMiddleware and { self._processOutboundMiddleware(...) } or { ... }
 
 	return Promise.try(instance.InvokeServer, instance, table.unpack(args))
-    :timeout(self._timeout, string.format(TIMEOUT_ERROR, self._name))
-    :andThen(function(...)
-        if self._processInboundMiddleware then
-            return self._processInboundMiddleware(...)
-        end
+		:timeout(self._timeout, string.format(TIMEOUT_ERROR, self._name))
+		:andThen(function(...)
+			if self._processInboundMiddleware then
+				return self._processInboundMiddleware(...)
+			end
 
-        return ...
-    end)
-    :catch(warn)
+			return ...
+		end)
+		:catch(warn)
 end
 
 --[=[
@@ -51,8 +51,8 @@ end
 ]=]
 
 function ClientAsyncEvent:setTimeout(timeout)
-    self._timeout = timeout
-    return self
+	self._timeout = timeout
+	return self
 end
 
 --[=[
@@ -82,8 +82,8 @@ function ClientAsyncEvent.new()
 		_signal = Signal.new(),
 		_instance = nil,
 		_processOutboundMiddleware = nil,
-        _processInboundMiddleware = nil,
-        _timeout = DEFAULT_TIMEOUT,
+		_processInboundMiddleware = nil,
+		_timeout = DEFAULT_TIMEOUT,
 	}, ClientAsyncEvent)
 end
 

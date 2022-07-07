@@ -96,6 +96,6 @@ local function buildPackages(modules)
 end
 
 return {
-    buildPackage = buildPackage,
+	buildPackage = buildPackage,
 	buildPackages = buildPackages,
 }

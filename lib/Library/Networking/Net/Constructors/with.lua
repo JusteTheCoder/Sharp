@@ -14,7 +14,7 @@ local use = NetPackage.use
 ]=]
 
 local function with(bridgeId, targetTable)
-    return use(bridgeId, Sharp.Singleton.define(bridgeId, targetTable))
+	return use(bridgeId, Sharp.Singleton.define(bridgeId, targetTable))
 end
 
 return with

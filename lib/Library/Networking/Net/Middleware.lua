@@ -11,7 +11,7 @@ local NetPackage = _G.Sharp.Package.Net
 ]=]
 
 return {
-    block = NetPackage.block,
-    throttle = NetPackage.throttle,
-    typeCheck = NetPackage.typeCheck,
+	block = NetPackage.block,
+	throttle = NetPackage.throttle,
+	typeCheck = NetPackage.typeCheck,
 }

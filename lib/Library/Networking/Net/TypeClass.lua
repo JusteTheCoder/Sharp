@@ -19,19 +19,19 @@ TypeClass.__index = TypeClass
 ]=]
 
 function TypeClass:_processCall(client, ...)
-    if self._outboundMiddleware == nil then
-        return true
-    end
+	if self._outboundMiddleware == nil then
+		return true
+	end
 
-    for _, middleware in ipairs(self._outboundMiddleware) do
-        local result, err = middleware(client, ...)
+	for _, middleware in ipairs(self._outboundMiddleware) do
+		local result, err = middleware(client, ...)
 
-        if result == false then
-            return false, err
-        end
-    end
+		if result == false then
+			return false, err
+		end
+	end
 
-    return true
+	return true
 end
 
 --[=[
@@ -44,19 +44,19 @@ end
 ]=]
 
 function TypeClass:_processReceive(client, ...)
-    if self._inboundMiddleware == nil then
-        return true
-    end
+	if self._inboundMiddleware == nil then
+		return true
+	end
 
-    for _, middleware in ipairs(self._inboundMiddleware) do
-        local result, err = middleware(client, ...)
+	for _, middleware in ipairs(self._inboundMiddleware) do
+		local result, err = middleware(client, ...)
 
-        if result == false then
-            return false, err
-        end
-    end
+		if result == false then
+			return false, err
+		end
+	end
 
-    return true
+	return true
 end
 
 --[=[
@@ -69,8 +69,8 @@ end
 ]=]
 
 function TypeClass:outboundProcess(fn)
-    self._processOutboundMiddleware = fn
-    return self
+	self._processOutboundMiddleware = fn
+	return self
 end
 
 --[=[
@@ -83,8 +83,8 @@ end
 ]=]
 
 function TypeClass:inboundProcess(fn)
-    self._processInboundMiddleware = fn
-    return self
+	self._processInboundMiddleware = fn
+	return self
 end
 
 --[=[
@@ -95,18 +95,18 @@ end
 ]=]
 
 function TypeClass:useOutboundMiddleware(middleware)
-    local middlewareTable = self._outboundMiddleware
+	local middlewareTable = self._outboundMiddleware
 
-    if middlewareTable == nil then
-        middlewareTable = {}
-        self._outboundMiddleware = middlewareTable
-    end
+	if middlewareTable == nil then
+		middlewareTable = {}
+		self._outboundMiddleware = middlewareTable
+	end
 
-    for _, middlewareConstructor in ipairs(middleware) do
-        table.insert(middlewareTable, middlewareConstructor(self))
-    end
+	for _, middlewareConstructor in ipairs(middleware) do
+		table.insert(middlewareTable, middlewareConstructor(self))
+	end
 
-    return self
+	return self
 end
 
 --[=[
@@ -117,18 +117,18 @@ end
 ]=]
 
 function TypeClass:useInboundMiddleware(middleware)
-    local middlewareTable = self._inboundMiddleware
+	local middlewareTable = self._inboundMiddleware
 
-    if middlewareTable == nil then
-        middlewareTable = {}
-        self._inboundMiddleware = middlewareTable
-    end
+	if middlewareTable == nil then
+		middlewareTable = {}
+		self._inboundMiddleware = middlewareTable
+	end
 
-    for _, middlewareConstructor in ipairs(middleware) do
-        table.insert(middlewareTable, middlewareConstructor(self))
-    end
+	for _, middlewareConstructor in ipairs(middleware) do
+		table.insert(middlewareTable, middlewareConstructor(self))
+	end
 
-    return self
+	return self
 end
 
 --[=[
@@ -139,7 +139,7 @@ end
 ]=]
 
 function TypeClass:Connect(fn)
-    return self._signal:Connect(fn)
+	return self._signal:Connect(fn)
 end
 
 return TypeClass

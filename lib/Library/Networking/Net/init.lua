@@ -6,13 +6,13 @@ local NetPackage = _G.Sharp.Package.Net
 ]=]
 
 return {
-    Type = NetPackage.Type,
-    Middleware = NetPackage.Middleware,
-    Trove = NetPackage.Trove,
+	Type = NetPackage.Type,
+	Middleware = NetPackage.Middleware,
+	Trove = NetPackage.Trove,
 
-    chain = NetPackage.chain,
+	chain = NetPackage.chain,
 
-    now = NetPackage.now,
-    use = NetPackage.use,
-    with = NetPackage.with,
+	now = NetPackage.now,
+	use = NetPackage.use,
+	with = NetPackage.with,
 }

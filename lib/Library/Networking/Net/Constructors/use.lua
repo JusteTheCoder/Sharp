@@ -15,18 +15,18 @@ local bridgeIndex = Symbol("bridgeIndex")
 ]=]
 
 local function netAdd(self, netTypes)
-    local bridgeId = self[bridgeIndex]
+	local bridgeId = self[bridgeIndex]
 
-    if netTypes == Trove then
-        netTypes = useTrove(bridgeId)
-    end
+	if netTypes == Trove then
+		netTypes = useTrove(bridgeId)
+	end
 
-    for name, netType in netTypes do
-        netType:_implement(bridgeId, name)
-        self[name] = netType
-    end
+	for name, netType in netTypes do
+		netType:_implement(bridgeId, name)
+		self[name] = netType
+	end
 
-    return self
+	return self
 end
 
 --[=[
@@ -40,12 +40,12 @@ end
 ]=]
 
 local function use(bridgeId, targetTable)
-    targetTable = targetTable or {}
+	targetTable = targetTable or {}
 
-    targetTable.netAdd = netAdd
-    targetTable[bridgeIndex] = bridgeId
+	targetTable.netAdd = netAdd
+	targetTable[bridgeIndex] = bridgeId
 
-    return targetTable
+	return targetTable
 end
 
 return use

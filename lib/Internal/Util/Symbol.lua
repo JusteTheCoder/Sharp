@@ -18,11 +18,11 @@
 ]=]
 
 local function new(name)
-    local symbol = newproxy(true)
-    getmetatable(symbol).__tostring = function()
-        return name or "Symbol"
-    end
-    return symbol
+	local symbol = newproxy(true)
+	getmetatable(symbol).__tostring = function()
+		return name or "Symbol"
+	end
+	return symbol
 end
 
 return new

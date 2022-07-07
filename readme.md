@@ -51,16 +51,20 @@ They can be accessed after initialization through the `Sharp.Library` table.
 Singletons are the core of Sharp. They are a way to create a single instance of a class that can be accessed from anywhere in the code.
 
 Accessing singletons:
+
 ```lua
     local MySingleton = Sharp.Singleton.MySingleton
 ```
 
 Creating singletons:
+
 ```lua
     local MySingleton = Sharp.Singleton.define("MySingleton")
     MySingleton.someValue = "Hello!"
 ```
+
 or
+
 ```lua
     local MySingleton = Sharp.Singleton.define("MySingleton", {
         someValue = "Hello!"
@@ -73,12 +77,12 @@ with the existing definition allowing cross-referencing singletons:
 ```lua
 	-- Singleton 1
 	local MySingleton1 = Sharp.Singleton.MySingleton1
-	
+
 	local MySingleton2 = Sharp.Singleton.define("MySingleton2")
-	
+
 	-- Singleton 2
 	local MySingleton2 = Sharp.Singleton.MySingleton2
-	
+
 	local MySingleton1 = Sharp.Singleton.define("MySingleton1")
 ```
 
@@ -113,13 +117,14 @@ built-in Net library.
 ### Networking basics
 
 Net has two types of events:
-    Event - Your standard event; can be fired and listened to.
-    AsyncEvent - An event that only be fired on the client and returns values asynchronously through a promise.
+Event - Your standard event; can be fired and listened to.
+AsyncEvent - An event that only be fired on the client and returns values asynchronously through a promise.
 
 Server-side example:
+
 ```lua
     local Net = Sharp.Library.Net
-    
+
     local MyBridge = Net.now("MyBridge", {
         myEvent = Net.Type.Event(),
         myAsyncEvent = Net.Type.AsyncEvent()
@@ -142,6 +147,7 @@ Server-side example:
 ```
 
 Client-side example:
+
 ```lua
     local Net = Sharp.Library.Net
 
@@ -163,10 +169,11 @@ Client-side example:
 
 Sharp also offers a middleware system for networking.
 There are two types of middleware:
-    Inbound - Called when an event is received
-    Outbound - Called when an event is sent
+Inbound - Called when an event is received
+Outbound - Called when an event is sent
 
 Server-side example:
+
 ```lua
     local MyBridge = ...
 
@@ -195,6 +202,7 @@ accept a function that takes the arguments and returns the modified arguments.
 These are called after the middleware has been processed.
 
 Client and server:
+
 ```lua
     local MyBridge = ...
 
@@ -240,8 +248,8 @@ In this case you can use Net.chain(...) to do just that.
 ### With singletons
 
 On top of the Net.one constructor, Net offers two other constructors:
-    Net.use - Accepts an optional table as the second argument.
-    Net.with - Same as Net.use, but constructs a singleton.
+Net.use - Accepts an optional table as the second argument.
+Net.with - Same as Net.use, but constructs a singleton.
 
 ```lua
     local MyNetObject = Net.use("MyNetObject", {
@@ -261,12 +269,13 @@ On top of the Net.one constructor, Net offers two other constructors:
 ```
 
 With Singletons:
+
 ```lua
     -- This doesn't look very nice.
     local MyNetObject = Net.use("MyNetObject", Sharp.Singleton.define("MyNetObject", {
         value = "Hello!"
     }))
-    
+
     -- Instead use Net.with
     local MyNetObject = Net.with("MyNetObject", {
         value = "Hello!"

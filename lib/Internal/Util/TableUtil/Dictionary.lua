@@ -5,7 +5,7 @@
 ]=]
 
 local function filter(t, fn)
-    local result = {}
+	local result = {}
 
 	for key, value in t do
 		if fn(key, value) then
@@ -17,7 +17,7 @@ local function filter(t, fn)
 end
 
 local function map(t, fn)
-    local result = {}
+	local result = {}
 
 	for key, value in t do
 		result[key] = fn(key, value)
@@ -43,7 +43,7 @@ local function reduce(t, fn, initialAccumulator)
 end
 
 local function deepCopy(t)
-    local result = table.clone(t)
+	local result = table.clone(t)
 
 	for key, value in result do
 		if type(value) == "table" then
@@ -55,35 +55,35 @@ local function deepCopy(t)
 end
 
 local function sync(t1, t2)
-    local target = table.clone(t1)
+	local target = table.clone(t1)
 
-    for k, v in target do
-        local v2 = t2[k]
+	for k, v in target do
+		local v2 = t2[k]
 
-        if v2 == nil then
-            target[k] = nil
-        elseif type(v) == "table" and type(v2) == "table" then
-            target[k] = sync(v, v2)
-        end
-    end
+		if v2 == nil then
+			target[k] = nil
+		elseif type(v) == "table" and type(v2) == "table" then
+			target[k] = sync(v, v2)
+		end
+	end
 
-    for k, v in t2 do
-        local v2 = target[k]
+	for k, v in t2 do
+		local v2 = target[k]
 
-        if v2 == nil then
-            if type(v) == "table" then
-                target[k] = table.clone(v)
-            else
-                target[k] = v
-            end
-        end
-    end
+		if v2 == nil then
+			if type(v) == "table" then
+				target[k] = table.clone(v)
+			else
+				target[k] = v
+			end
+		end
+	end
 
-    return target
+	return target
 end
 
 local function reconcile(t1, t2)
-    local tbl = table.clone(t1)
+	local tbl = table.clone(t1)
 
 	for k, v in t2 do
 		local sv = t1[k]
@@ -106,23 +106,23 @@ local function reconcile(t1, t2)
 end
 
 local function keys(t)
-    local result = {}
+	local result = {}
 
-    for key in t do
-        table.insert(result, key)
-    end
+	for key in t do
+		table.insert(result, key)
+	end
 
-    return result
+	return result
 end
 
 local function values(t)
-    local result = {}
+	local result = {}
 
-    for _, value in t do
-        table.insert(result, value)
-    end
+	for _, value in t do
+		table.insert(result, value)
+	end
 
-    return result
+	return result
 end
 
 local function merge(t1, t2)
@@ -134,11 +134,11 @@ local function merge(t1, t2)
 end
 
 local function mergeAll(t1, ...)
-    local n = select('#', ...)
-    for i = 1, n do
-        merge(t1, select(i, ...))
-    end
-    return t1
+	local n = select("#", ...)
+	for i = 1, n do
+		merge(t1, select(i, ...))
+	end
+	return t1
 end
 
 local function isEmpty(t)
@@ -156,44 +156,44 @@ local function size(t)
 end
 
 local function lock(t)
-    for _, value in t do
-        if type(value) == "table" then
-            lock(value)
-        end
-    end
+	for _, value in t do
+		if type(value) == "table" then
+			lock(value)
+		end
+	end
 
-    table.freeze(t)
-    return t
+	table.freeze(t)
+	return t
 end
 
 local function every(t, fn)
-    for key, value in t do
-        if not fn(value, key) then
-            return false
-        end
-    end
+	for key, value in t do
+		if not fn(value, key) then
+			return false
+		end
+	end
 
-    return true
+	return true
 end
 
 local function some(t, fn)
-    for key, value in t do
-        if fn(value, key) then
-            return true
-        end
-    end
+	for key, value in t do
+		if fn(value, key) then
+			return true
+		end
+	end
 
-    return false
+	return false
 end
 
 local function find(t, fn)
-    for key, value in t do
-        if fn(value, key) then
-            return value, key
-        end
-    end
+	for key, value in t do
+		if fn(value, key) then
+			return value, key
+		end
+	end
 
-    return nil
+	return nil
 end
 
 local function fill(t1, t2)
@@ -207,21 +207,21 @@ local function fill(t1, t2)
 end
 
 return {
-    filter = filter,
-    map = map,
-    reduce = reduce,
-    deepCopy = deepCopy,
-    sync = sync,
-    reconcile = reconcile,
-    keys = keys,
-    values = values,
-    merge = merge,
-    mergeAll = mergeAll,
-    isEmpty = isEmpty,
-    size = size,
-    lock = lock,
-    every = every,
-    some = some,
-    find = find,
-    fill = fill,
+	filter = filter,
+	map = map,
+	reduce = reduce,
+	deepCopy = deepCopy,
+	sync = sync,
+	reconcile = reconcile,
+	keys = keys,
+	values = values,
+	merge = merge,
+	mergeAll = mergeAll,
+	isEmpty = isEmpty,
+	size = size,
+	lock = lock,
+	every = every,
+	some = some,
+	find = find,
+	fill = fill,
 }

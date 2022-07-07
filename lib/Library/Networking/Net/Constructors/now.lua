@@ -15,15 +15,15 @@ local useTrove = NetPackage.useTrove
 ]=]
 
 local function now(bridgeId, netTypes)
-    if netTypes == Trove then
-        netTypes = useTrove(bridgeId)
-    end
+	if netTypes == Trove then
+		netTypes = useTrove(bridgeId)
+	end
 
-    for name, netType in netTypes do
-        netType:_implement(bridgeId, name)
-    end
+	for name, netType in netTypes do
+		netType:_implement(bridgeId, name)
+	end
 
-    return netTypes
+	return netTypes
 end
 
 return now

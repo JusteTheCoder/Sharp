@@ -279,7 +279,7 @@ end
 ]=]
 
 function Vector3Util.getMagnitudeSquared(vector)
-	return vector.X*vector.X + vector.Y*vector.Y + vector.Z*vector.Z
+	return vector.X * vector.X + vector.Y * vector.Y + vector.Z * vector.Z
 end
 
 table.freeze(Vector3Util)
