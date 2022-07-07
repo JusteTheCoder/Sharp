@@ -46,4 +46,6 @@ jobs:
           WALLY_AUTH: ${{ secrets.WALLY_AUTH }}
         run: |
           cd lib
+          mkdir =p ~/.wally
+          printf "[tokens]\n\"https://api.wally.run/\" = \"%s\"" "$WALLY_TOKEN" >> ~/.wally/auth.toml
           wally publish
