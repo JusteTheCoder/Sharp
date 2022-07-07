@@ -53,14 +53,14 @@ function ServerAsyncEvent:_implement(bridgeId, name)
 			end
 
 			local args
-			if self._processReceiveFunction then
-				args = table.pack(self:_processReceiveFunction(...))
+			if self._processInboundMiddleware then
+				args = table.pack(self:_processInboundMiddleware(...))
 			else
 				args = table.pack(...)
 			end
 
-			if self._processCallFunction then
-				return self._processCallFunction(callback(client, table.unpack(args, 1, args.n)))
+			if self._processOutboundMiddleware then
+				return self._processOutboundMiddleware(callback(client, table.unpack(args, 1, args.n)))
 			else
 				return callback(client, table.unpack(args, 1, args.n))
 			end
@@ -91,9 +91,9 @@ function ServerAsyncEvent.new()
 		_signal = Signal.new(),
 		_instance = nil,
 		_callback = nil,
-		_processCallFunction = nil,
-		_processReceiveFunction = nil,
-		_receiveMiddleware = nil,
+		_processOutboundMiddleware = nil,
+		_processInboundMiddleware = nil,
+		_inboundMiddleware = nil,
 	}, ServerAsyncEvent)
 end
 

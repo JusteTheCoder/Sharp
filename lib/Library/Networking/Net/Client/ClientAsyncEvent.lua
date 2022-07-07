@@ -29,13 +29,13 @@ ClientAsyncEvent.__index = ClientAsyncEvent
 
 function ClientAsyncEvent:callServer(...)
 	local instance = self._instance
-    local args = self._processCallFunction and {self._processCallFunction(...) }or {...}
+    local args = self._processOutboundMiddleware and {self._processOutboundMiddleware(...) }or {...}
 
 	return Promise.try(instance.InvokeServer, instance, table.unpack(args))
     :timeout(self._timeout, string.format(TIMEOUT_ERROR, self._name))
     :andThen(function(...)
-        if self._processReceiveFunction then
-            return self._processReceiveFunction(...)
+        if self._processInboundMiddleware then
+            return self._processInboundMiddleware(...)
         end
 
         return ...
@@ -81,8 +81,8 @@ function ClientAsyncEvent.new()
 	return setmetatable({
 		_signal = Signal.new(),
 		_instance = nil,
-		_processCallFunction = nil,
-        _processReceiveFunction = nil,
+		_processOutboundMiddleware = nil,
+        _processInboundMiddleware = nil,
         _timeout = DEFAULT_TIMEOUT,
 	}, ClientAsyncEvent)
 end

@@ -19,11 +19,11 @@ TypeClass.__index = TypeClass
 ]=]
 
 function TypeClass:_processCall(client, ...)
-    if self._callMiddleware == nil then
+    if self._outboundMiddleware == nil then
         return true
     end
 
-    for _, middleware in ipairs(self._callMiddleware) do
+    for _, middleware in ipairs(self._outboundMiddleware) do
         local result, err = middleware(client, ...)
 
         if result == false then
@@ -44,11 +44,11 @@ end
 ]=]
 
 function TypeClass:_processReceive(client, ...)
-    if self._receiveMiddleware == nil then
+    if self._inboundMiddleware == nil then
         return true
     end
 
-    for _, middleware in ipairs(self._receiveMiddleware) do
+    for _, middleware in ipairs(self._inboundMiddleware) do
         local result, err = middleware(client, ...)
 
         if result == false then
@@ -68,8 +68,8 @@ end
     @return self
 ]=]
 
-function TypeClass:onCallProcess(fn)
-    self._processCallFunction = fn
+function TypeClass:outboundProcess(fn)
+    self._processOutboundMiddleware = fn
     return self
 end
 
@@ -82,8 +82,8 @@ end
     @return self
 ]=]
 
-function TypeClass:onReceiveProcess(fn)
-    self._processReceiveFunction = fn
+function TypeClass:inboundProcess(fn)
+    self._processInboundMiddleware = fn
     return self
 end
 
@@ -94,12 +94,12 @@ end
     @return self
 ]=]
 
-function TypeClass:onCallMiddleware(middleware)
-    local middlewareTable = self._callMiddleware
+function TypeClass:useOutboundMiddleware(middleware)
+    local middlewareTable = self._outboundMiddleware
 
     if middlewareTable == nil then
         middlewareTable = {}
-        self._callMiddleware = middlewareTable
+        self._outboundMiddleware = middlewareTable
     end
 
     for _, middlewareConstructor in ipairs(middleware) do
@@ -116,12 +116,12 @@ end
     @return self
 ]=]
 
-function TypeClass:onReceiveMiddleware(middleware)
-    local middlewareTable = self._receiveMiddleware
+function TypeClass:useInboundMiddleware(middleware)
+    local middlewareTable = self._inboundMiddleware
 
     if middlewareTable == nil then
         middlewareTable = {}
-        self._receiveMiddleware = middlewareTable
+        self._inboundMiddleware = middlewareTable
     end
 
     for _, middlewareConstructor in ipairs(middleware) do

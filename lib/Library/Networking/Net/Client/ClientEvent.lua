@@ -22,8 +22,8 @@ ClientEvent.__index = ClientEvent
 ]=]
 
 function ClientEvent:sendToServer(...)
-	if self._processCallFunction then
-		self._instance:FireClient(self._processCallFunction(...))
+	if self._processOutboundMiddleware then
+		self._instance:FireClient(self._processOutboundMiddleware(...))
 	else
 		self._instance:FireClient(...)
 	end
@@ -44,8 +44,8 @@ function ClientEvent:_implement(bridgeId, name)
 		self._instance = instance
 
         self._instance.OnClientEvent:Connect(function(...)
-            if self._processReceiveFunction then
-                self._signal:fire(self:_processReceiveFunction(...))
+            if self._processInboundMiddleware then
+                self._signal:fire(self:_processInboundMiddleware(...))
             else
                 self._signal:fire(...)
             end
@@ -63,8 +63,8 @@ function ClientEvent.new()
 	return setmetatable({
 		_signal = Signal.new(),
 		_instance = nil,
-		_processCallFunction = nil,
-		_processReceiveFunction = nil,
+		_processOutboundMiddleware = nil,
+		_processInboundMiddleware = nil,
 	}, ClientEvent)
 end
 

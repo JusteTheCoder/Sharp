@@ -31,8 +31,8 @@ function ServerEvent:sendToClient(client, ...)
 		return warn(err)
 	end
 
-	if self._processCallFunction then
-		self._instance:FireClient(client, self._processCallFunction(...))
+	if self._processOutboundMiddleware then
+		self._instance:FireClient(client, self._processOutboundMiddleware(...))
 	else
 		self._instance:FireClient(client, ...)
 	end
@@ -47,8 +47,8 @@ end
 
 function ServerEvent:sendToClients(clientList, ...)
 	local args
-	if self._processCallFunction then
-		args = table.pack(self._processCallFunction(...))
+	if self._processOutboundMiddleware then
+		args = table.pack(self._processOutboundMiddleware(...))
 	else
 		args = table.pack(...)
 	end
@@ -115,8 +115,8 @@ function ServerEvent:_implement(bridgeId, name)
 				return warn(err)
 			end
 
-			if self._processReceiveFunction then
-				self._signal:fire(client, self:_processReceiveFunction(...))
+			if self._processInboundMiddleware then
+				self._signal:fire(client, self:_processInboundMiddleware(...))
 			else
 				self._signal:fire(client, ...)
 			end
@@ -134,10 +134,10 @@ function ServerEvent.new()
 	return setmetatable({
 		_signal = Signal.new(),
 		_instance = nil,
-		_processCallFunction = nil,
-		_processReceiveFunction = nil,
-		_callMiddleware = nil,
-		_receiveMiddleware = nil,
+		_processOutboundMiddleware = nil,
+		_processInboundMiddleware = nil,
+		_outboundMiddleware = nil,
+		_inboundMiddleware = nil,
 	}, ServerEvent)
 end
 
