@@ -277,7 +277,7 @@ To use more than one function, just pass them to the inboundProcess and outbound
 Using the the following structure you can create a custom middleware.
 Logger example:
 ```lua
-    local MESSAGE = "Client '%s' fired event '%s' with arguments: %s"
+	local MESSAGE = "Client '%s' fired event '%s' with arguments: %s"
 
 	local function logger(netType)
 		return function(client, ...)
