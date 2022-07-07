@@ -267,7 +267,7 @@ With Singletons:
         value = "Hello!"
     }))
     
-    -- Instead use Net.with to which creates a singleton.
+    -- Instead use Net.with
     local MyNetObject = Net.with("MyNetObject", {
         value = "Hello!"
     })
