@@ -9,22 +9,16 @@
 
 ### Motivation
 
-In the past I've tried tons of different frameworks. For the longest time I used Knit
-,however to me Knits service-controller architecture feels too restrictive. So I decided to create my own.
+I've experimented with a wide variety of frameworks in the past. I've used Knit for quite a long time, but its service-controller design feels too restrictive to me. I thus made the decision to design my own.
 
 ### Structure
 
-Unlike Knit, Sharp abstracts the networking functionality away from services and controllers leaving 
-away a lifecycle object known as a singleton. Due to the internal structure of singletons they also
-permit cross-referencing between each other.
+Sharp, in contrast to Knit, isolates the networking logic away from services and controllers, leaving behind a singleton. Singletons are also able to reference one another cross-referentially because of their internal structure.
 
 ### Networking
 
-Sharp comes packed in with a powerful networking library called SharpNet, or just net. Net is a safe
-solution for networking offering an extensive middleware api. 
-
-Now I don't want to sound too ambitious, but I'm fairly confident that Net offers the most
-functionality out of all open-source networking libraries designed for Roblox development.
+The net library from Sharp is a potent tool for networking. With its rich middleware api, Net is a secure and easy to use networking solution.
+As much as I don't want to seem excessively ambitious, I'm fairly confident that net provides the most networking functionality of all the open source networking libraries for Roblox.
 
 ## Installation
 
@@ -35,8 +29,7 @@ a dependency (e.g. `Sharp = "justethecoder/sharp@3.0.0"`)
 
 ## Quick Start
 
-Now generally you'll want to use only two scripts: one localscript in 'StarterPlayerScripts' and one
-serverscript in 'ServerScriptService'.
+Generally speaking, you should only use two scripts: a local script in the "StarterPlayerScripts" folder and a server script in the "ServerScriptService" folder.
 
 The contents of those scripts in the most basic case is as follows:
 ```lua
@@ -57,9 +50,8 @@ After initialization, Sharp will be available as a global variable "_G.Sharp".
 
 ### Adding singletons and libraries
 
-Before calling the start function you can add locations to Sharp.
-All modules under the given location will be added to Sharp as either singletons or libraries
-and their sub-modules as packages.
+Locations can be added to Sharp before using the start function.
+Each module under the specified location will be added to Sharp as a singleton or library, and each module's sub-modules will be added as packages.
 
 ```lua
     Sharp.addSingletons(singletonFolder)
@@ -68,7 +60,7 @@ and their sub-modules as packages.
 
 ### Libraries
 
-Libraries are simply modules which are lazy-loaded when they are accessed.
+Libraries are simply modules that are lazy loaded when required:
 ```lua
     local Sharp = _G.Sharp
     local MyModule = Sharp.Library.MyModule
@@ -103,13 +95,12 @@ To create a singleton, call the define function:
 ```
 
 Singletons can be accessed before they are created, and the optional data will be merged with the existing definition allowing cross-referencing singletons.
-
 Accessing singletons:
 ```lua
     local MySingleton = Sharp.Singleton.MySingleton
 ```
 
-Singleton modules aren't forced to return a singleton value:
+A singleton module is not required to return a singleton value:
 ```lua
     local MySingleton = {}
 
@@ -124,7 +115,9 @@ Sharp offers some powerful networking features through its built-in Net library.
 
 #### Networking basics
 
-Net has two types of events: Event - Your standard event; can be fired and listened to. AsyncEvent - An event that can only be fired on the client and returns values asynchronously through a promise.
+Net has two types of events: 
+Event - A typical event that may be called and listened to. 
+AsyncEvent - An event that can be called solely on the client and returns values asynchronously via a promise.
 
 Server-side example:
  ```lua
@@ -193,7 +186,7 @@ You can use a singleton as the second argument:
 ```
 
 However that doesn't look very nice.
-So use Net.with instead:
+Use Net.with instead:
 ```lua
     -- Defines a singleton
     local MyNetObject = Net.with("MyNetObject", {
@@ -257,9 +250,7 @@ Client and server:
     MyBridge.myEvent:outboundProcess(serialize)
 ```
 
-To use multiple functions use simply pass multiple functions
-to the inboundProcess and outboundProcess methods or use Net.chain(...) to construct
-a chain of functions.
+To use more than one function, just pass them to the inboundProcess and outboundProcess methods, or create a chain of functions using Net.chain(...).
 
 ```lua
     local MyBridge = ...
