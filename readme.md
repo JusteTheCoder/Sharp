@@ -23,7 +23,7 @@ As much as I don't want to seem excessively ambitious, I'm fairly confident that
 ## Installation
 
 Sharp can be installed through wally by adding it as
-a dependency (e.g. `Sharp = "justethecoder/sharp@0.1.0"`)
+a dependency (e.g. `Sharp = "justethecoder/sharp@0.2.0"`)
 
 [Installing Wally](https://github.com/UpliftGames/wally)
 
