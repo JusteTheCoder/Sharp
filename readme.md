@@ -136,6 +136,11 @@ Server-side example:
         task.wait(10)
         return "Hello ".. client.Name .. "!"
     end)
+    
+    MyBridge.myEvent:sendToClient(client, ...)
+    MyBridge.myEvent:sendToClients({client}, ...)
+    MyBridge.myEvent:sendToClientsExcept({client}, ...)
+    MyBridge.myEvent:sendToAllClients(...)
  ```
 
 Client-side example:
